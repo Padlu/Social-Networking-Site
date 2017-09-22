@@ -1,0 +1,41 @@
+        <div class="post-content">
+            {% if id.image %}
+              <img src="{{ id.image.url }}" alt="post-image" class="img-responsive post-image" />
+            {% endif %}
+                <div class="post-container">
+                    <img src="{{ user.display.url }}" alt="user" class="profile-photo-md pull-left" />
+                    <div class="post-detail">
+                        <div class="user-info">
+                            <h5><a href="timeline.html" class="profile-link">{{ user.firstn }} {{ user.lastn }}</a> <span class="following">following</span></h5>
+                            <p class="text-muted">Published a photo about {{ id.datepublished|timesince }} ago</p>
+                        </div>
+                    <div class="reaction">
+                        <a href="{%  url "liked" post=id.datepubchar %}" class="btn text-green"><i class="icon ion-thumbsup"></i> {{ id.likes }}</a>
+                        <a href="{%  url "disliked" post=id.datepubchar %}" class="btn text-red"><i class="fa fa-thumbs-down"></i> {{ id.dislikes }}</a>
+                    </div>
+                    <div class="line-divider"></div>
+                        <div class="post-text">
+                            {% if id.post %}
+                                <p>{{ id.post }}</p>
+                            {% endif %}
+                        <div class="line-divider"></div>
+                            {%  if id.comments_set.exists %}
+                                {% for id in id.comments_set.all %}
+                                    <div class="post-comment">
+                                        <img src="{{ user.display.url }}" alt="" class="profile-photo-sm" />
+                                        <p><a href="#" class="profile-link">{{ user.firstn }} </a> {{ id.comment }}</p><br>
+                                        <p class="text-muted" id="text-muted-float">{{ id.datecommented|timesince }} ago</p>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                            <div class="post-comment">
+                                <img src="{{ user.display.url }}" alt="" class="profile-photo-sm" />
+                                <form method="POST" name="postcomment" action={%  url "comment" post=id.datepubchar %}>{% csrf_token %}
+                                    <input name="comment" type="text" class="form-control" placeholder="Post a comment">
+                                    <button name="somecomment" value="button" class="btn btn-primary pull-right">Post</button>
+                                </form>
+                            </div>
+                    </div>
+              </div>
+        </div>

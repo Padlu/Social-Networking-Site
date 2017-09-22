@@ -1,0 +1,34 @@
+{% extends "index.html" %}
+
+{% block personal %}
+
+{% if errors %}
+{{ errors }}
+{% endif %}
+
+<form method="POST" enctype="multipart/form-data">{% csrf_token %}
+    <p class="required-asterik" style="float: right"><span>*</span> fields are required</p>
+    <fieldset class="form-group">
+        <label for="file-image" class="image-label"><i id="post" class="ion-images"></i><span>ab</span>Upload your Profile Picture.</label>
+        <input name="userdisplay" id="file-image" type="file" accept=".jpg, .jpeg, .png">
+    </fieldset>
+    <fieldset class="form-group">
+        <input type="text" name = 'mobile' class="form-control" id="example-email" placeholder="Enter Mobile No.">
+    </fieldset>
+    <fieldset class="form-group">
+        <input type="text" name = 'address' class="form-control" id="example-password" placeholder="City, State, Country">
+    </fieldset>
+    <fieldset class="form-group">
+        <input type="date" name = 'birthdate' class="form-control" id="example-password" placeholder="* Birthdate : YYYY/MM/DD">
+    </fieldset>
+    <fieldset class="form-group">
+        <input type="text" name = 'gender' class="form-control" id="example-password" placeholder="Male/Female/Trans">
+    </fieldset>
+    <fieldset class="form-group">
+        <input type="text" name = 'languages' class="form-control" id="example-password" placeholder="Enter languages you know">
+    </fieldset>
+    <button class="btn-secondary">Complete the SignUp</button>
+</form>
+
+
+{% endblock %}

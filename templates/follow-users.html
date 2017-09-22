@@ -1,0 +1,18 @@
+
+    <div class="follow-user">
+        <img src="{{ id.display.url }}" alt="" class="profile-photo-sm pull-left" />
+        <div>
+            <h5><a href="#">{{ id.firstn }} {{ id.lastn }}</a></h5>
+            {% for id in id.friends_set.all %}
+                {% ifequal id.friend_name user.email_id %}
+                    <a href="#" class="text-green">following</a>
+                {% endifequal %}
+                {% ifnotequal id.friend_name user.email_id %}
+                    <a href="{% url 'request' fuser=id %}" class="text-green">Add friend</a>
+                {% endifnotequal %}
+            {% endfor %}
+            {% if not id.friends_set.all %}
+                <a href="{% url 'request' fuser=id %}" class="text-green">Add friend</a>
+            {% endif %}
+        </div>
+    </div>

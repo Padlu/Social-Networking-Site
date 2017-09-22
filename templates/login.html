@@ -1,0 +1,25 @@
+{% extends "index.html" %}
+
+{% block login %}
+
+{% if errors %}
+{{ errors }}
+{% endif %}
+
+<form method="POST" >{% csrf_token %}
+    <p class="required-asterik" style="float: right"><span>*</span> fields are required</p>
+    <fieldset class="form-group">
+        <input type="email" name = 'email_id' class="form-control" id="example-email" placeholder="* Enter email">
+    </fieldset>
+    <fieldset class="form-group">
+        <input type="password" name = 'password' class="form-control" id="example-password" placeholder="* Enter a password">
+    </fieldset>
+    {% if incorrect %}
+        <p style="float: right">Email Id or Password is incorrect</p>
+    {% endif %}
+    <button class="btn-secondary">Login</button><br>
+    <a href='{% url "signup" %}'>Don't have an account?</a>
+</form>
+
+
+{% endblock %}
